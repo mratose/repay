@@ -27,8 +27,8 @@ class SaveRepay:
 
                 repaymentParam.append(
                     (
-                        payments['CustomerID'],
-                        payments['SeasonId'],
+                        payments['customerid'],
+                        payments['seasonid'],
                         payments['Date'],
                         payments['Amount'],
                         max_record
@@ -44,7 +44,7 @@ class SaveRepay:
 
 
         except Exception as error:
-            print("Error while fetching data from SQLSERVER", error)
+            print("Error while Inserting data to SQLSERVER", error)
 
     def getmaxrecord(self):
 
@@ -69,8 +69,5 @@ class SaveRepay:
 
 
         except Exception as error:
-            print("Error while fetching data from SQLSERVER", error)
+            print("Error while fetching maxrcord data from SQLSERVER", error)
 
-
-#SaveRepay = SaveRepay()
-#print(SaveRepay.getmaxrecord())

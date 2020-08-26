@@ -1,8 +1,10 @@
 import json
 from Data.SaveRepayments import SaveRepay
+from Data.CustomerSummaries import CustomerSummaries
 
 
 class RepaymentService:
+
 
     def __init__(self):
         # loading our json file here to use it across different class methods
@@ -22,12 +24,11 @@ class RepaymentService:
 
 # get customer summary information per client
     def get_cust_summary(self, customerid):
-        summary_list = []
-        summary = self.customersummaries
-        for key in summary:
-            if key['CustomerID'] == customerid:
-                summary_list.append(key)
-        return summary_list
+        summarycust = CustomerSummaries()
+
+        summary = summarycust.get_customer_summaries(customerid)
+
+        return json.loads(summary[0][0])
 
 #determine season that requires repayment based on client repayment upload
     def determine_season(self, customer_id):
@@ -43,11 +44,11 @@ class RepaymentService:
             #print(cust_summary)
 
             for repay in cust_summary:
-                if repay['TotalRepaid'] != repay['Credit'] and repay['Credit'] > repay['TotalRepaid']:
-                    to_pay = repay['Credit'] - repay['TotalRepaid']
+                if repay['totalrepaid'] != repay['credit'] and repay['credit'] > repay['totalrepaid']:
+                    to_pay = repay['credit'] - repay['totalrepaid']
 
-                    repay_dict['CustomerID'] = customer_id
-                    repay_dict['SeasonId'] = repay['SeasonID']
+                    repay_dict['customerid'] = customer_id
+                    repay_dict['seasonid'] = repay['seasonid']
                     repay_dict['Date'] = date
                     repay_dict['season_due_amt'] = to_pay
                     repay_dict['current_repay_amt'] = repayment_amt
@@ -55,58 +56,63 @@ class RepaymentService:
 
             return repay_list
         else:
-            repay_dict['CustomerID'] = customer_id
-            repay_dict['SeasonId'] = seasonid
+            repay_dict['customerid'] = customer_id
+            repay_dict['seasonid'] = seasonid
             repay_dict['Date'] = date
             repay_dict['season_due_amt'] = repayment_amt
             repay_dict['current_repay_amt'] = repayment_amt
             repay_list.append(repay_dict.copy())
             return repay_list
 
-#Now lets create the repayment records
+    #Now lets create the repayment records
     def repay(self, customer_id):
         determine_season = self.determine_season(customer_id)
         repayment = self.get_repayment(customer_id)
         repayment_amt = repayment['Amount']
-        repay_dict = {}
-        repay_list = []
-        track = repayment_amt
 
-        for i in determine_season:
-            print(i)
-
+        #if theres nothing to pay update the most recent season else go ahead and create repayments
+        if len(determine_season) == 0:
+            summary = CustomerSummaries()
+            summary.upd_summary_max_season(customer_id, repayment_amt)
+            print("Updated max season")
+        else:
+            repay_dict = {}
+            repay_list = []
+            global avail_bal
             avail_bal = repayment_amt
-            due = i['season_due_amt']
-            while track > 0:
-                repay_dict['CustomerID'] = customer_id
-                repay_dict['SeasonId'] = i['SeasonId']
-                repay_dict['Date'] = i['Date']
-                repay_dict['Amount'] = track
-                repay_list.append(repay_dict.copy())
 
-                track = avail_bal - due
+            for i in determine_season:
 
-                if avail_bal > due:
-                    track = avail_bal - due
-                    repay_dict['CustomerID'] = customer_id
-                    repay_dict['SeasonId'] = i['SeasonId']
+                while avail_bal > 0:
+                    due = i['season_due_amt']
+                    repay_dict['customerid'] = customer_id
+                    repay_dict['seasonid'] = i['seasonid']
                     repay_dict['Date'] = i['Date']
-                    repay_dict['Amount'] = track * -1
+                    repay_dict['Amount'] = avail_bal
                     repay_list.append(repay_dict.copy())
-                    track = avail_bal - due
-                    #break
-                #avail_bal = avail_bal - due
 
-        createRepay = SaveRepay()
-        createRepay.insertrepayment(repay_list)
-        #return repay_list
+                    avail_bal = avail_bal - due
+
+                    if avail_bal > 0:
+
+                        repay_dict['customerid'] = customer_id
+                        repay_dict['seasonid'] = i['seasonid']
+                        repay_dict['Date'] = i['Date']
+                        repay_dict['Amount'] = avail_bal * -1
+                        repay_list.append(repay_dict.copy())
+                    break
+
+            #insert the repayments to the database
+            createRepay = SaveRepay()
+            createRepay.insertrepayment(repay_list)
+
+            #update the Customer summary
+            updSummary = CustomerSummaries()
+            updSummary.upd_customer_summaries()
 
 
-repay = RepaymentService()
-#print(repay.get_repayment(1))
-#print(repay.get_cust_summary(11))
-#print(repay.determine_season(11))
-repay.repay(11)
+
+
 
 
 
