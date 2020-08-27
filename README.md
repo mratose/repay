@@ -10,8 +10,8 @@ Repayments are processed whether the clients have specified the season that want
 # Getting Started
 
 - Clone the repo and run the Repay repo
-- I have hosted a database on AWS 
-- Details of database would be found in constant file in utility file.
+- I have hosted a database on [AWS]( https://aws.amazon.com/). 
+- Details of database would be found in constant file in utility file. You can connect from anywhere.
 - All data schema has been created on database.
 - Table Structure
 ```
