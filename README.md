@@ -111,7 +111,10 @@ go
   This includes my HTML file(home.htl and chart.html) for the basic interfaces. This module is not yet completed.
   
  ## Utility
-COntains a constant class that holds Constansts such as  Database parameters and other information which do not change.
+ Contains a constant class that holds Constansts such as  Database parameters and other information which do not change.
+
+ ## Test Data
+ Contains a test data scripts
 
  ## app.py
  This is my flask web application to display basic interface. THis module is not yet completed.
@@ -148,7 +151,8 @@ COntains a constant class that holds Constansts such as  Database parameters and
 ## How you would improve your approach in future projects:
 	- Draw up a proper and detailed design for the app.
 	- Using generators & yield for memory efficiency.
-	- 
+	- include tran_type to repayment to easily determine credit or debit transaction.
+	
 ## Improvements/enhancements to this project for future consideration:
 	- Error Handling
 	- Use generators & yield to make code faster and handle large data should incase data grows. 
