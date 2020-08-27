@@ -1,0 +1,34 @@
+--test data 2. Many outstanding seasons with small amount of outstanding
+use repayment
+go
+truncate table CustomerSummaries
+go
+
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 180, CAST(4500.000000 AS Decimal(21, 6)), CAST(4510.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 181, CAST(4000.000000 AS Decimal(21, 6)), CAST(4010.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 182, CAST(4500.000000 AS Decimal(21, 6)), CAST(4510.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 183, CAST(6200.000000 AS Decimal(21, 6)), CAST(6210.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 184, CAST(6200.000000 AS Decimal(21, 6)), CAST(6210.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 185, CAST(600.000000 AS Decimal(21, 6)), CAST(610.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 186, CAST(3000.000000 AS Decimal(21, 6)), CAST(3005.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 187, CAST(900.000000 AS Decimal(21, 6)), CAST(901.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 188, CAST(4000.000000 AS Decimal(21, 6)), CAST(4001.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 189, CAST(400.000000 AS Decimal(21, 6)), CAST(405.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 190, CAST(620.000000 AS Decimal(21, 6)), CAST(633.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 191, CAST(6200.000000 AS Decimal(21, 6)), CAST(6200.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 192, CAST(500.000000 AS Decimal(21, 6)), CAST(4500.000000 AS Decimal(21, 6)))
+GO
+INSERT [dbo].[CustomerSummaries] ([CustomerID], [SeasonID], [TotalRepaid], [Credit]) VALUES (11, 192, CAST(450.000000 AS Decimal(21, 6)), CAST(450.000000 AS Decimal(21, 6)))
+GO
