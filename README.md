@@ -1,4 +1,5 @@
-# Seasonless Repayment App
+# Seasonless Repayment App 
+# (Note: Post - mortem is at the bottom )
 This app helps to process repayment of outstanding credits that have been previously been approved.
 Each season, clients purchase products on credit, and over the course of a season, they repay their credit, and so clients have credit associated with them on a 
 season-by-season basis.
@@ -114,3 +115,41 @@ COntains a constant class that holds Constansts such as  Database parameters and
 
  ## app.py
  This is my flask web application to display basic interface. THis module is not yet completed.
+ 
+ 
+ 
+ 
+# Post-mortem - 
+## Current project status : The Project is about 80% complete. The following is the status:
+
+	1. Service class has been implemented and can do the following:
+	 - Receive repayment upload based on clients.
+	 - Determine the season repayment should be applied to.
+	 - Output a list of repayments for the correct client, season, and amount for each repayment.
+	 - Shows adjustment repayments as well as original repayment
+	 - Every adjusted repayment can be associated back to the original repayment.
+	 - Takes care of the overpaid for those client that do not have outstanding payments in later season or any season at all.
+	 - Takes care of the override for the client that specify a repayment season.
+	 - Takes care of the cascade situation.
+
+	2. Basic interface is yet to be completed.
+
+## Estimate on the outstanding work. 
+	-Outstanding work can be completed in a day or less.
+	
+## Successes/what went well
+	-Logic implentation to create repayments and also update of customer summary.
+	- Being able to handle some of the implentation at the database level.
+	
+## Bumps/what you wished went better
+	- UI/UX
+	- Use of list comprehensions for a more readable code.
+	
+## How you would improve your approach in future projects:
+	- Draw up a proper and detailed design for the app.
+	- Using generators & yield for memory efficiency.
+	- 
+## Improvements/enhancements to this project for future consideration:
+	- Error Handling
+	- Use generators & yield to make code faster and handle large data should incase data grows. 
+	- TDD
