@@ -111,6 +111,11 @@ class RepaymentService:
             updSummary.upd_customer_summaries()
 
 
+if __name__ == '__main__':
+    repay = RepaymentService()
+    repay.repay(11)
+
+
 
 
 
